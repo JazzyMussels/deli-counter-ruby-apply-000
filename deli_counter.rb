@@ -1,12 +1,11 @@
-katz_deli = []
+katz_deli = []    
+#we start the day with an empty line
 
-def line(deli)
-  if deli.length > 0
-    i = 0 
+def line(deli)                            
+  if deli.length > 0                
     msg = "The line is currently:"
-    while i < deli.length 
-      msg = msg + " #{i + 1}. #{deli[i]}"
-      i += 1 
+    deli.each_with_index do |name, idx|
+      msg << " #{idx.next}. #{name}" 
     end
       puts msg 
   else 
@@ -14,16 +13,14 @@ def line(deli)
   end
 end
 
-
 def take_a_number(deli, name)
-  if !deli.include?(name)
-    deli.push(name)
-  end
-  puts "Welcome, #{name}. You are number " + (deli.index(name) + 1).to_s + " in line."
+  deli << name unless deli.include?(name)
+  line_number = (deli.index(name).next)
+  puts "Welcome, #{name}. You are number #{line_number} in line."
 end
 
 def now_serving(deli)
-  if deli.length == 0 
+  if deli.empty?
     puts "There is nobody waiting to be served!"
   else
     puts "Currently serving #{deli.shift}."
